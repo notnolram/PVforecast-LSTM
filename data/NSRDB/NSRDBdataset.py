@@ -9,7 +9,7 @@ import urllib.parse
 import time
 from dotenv import load_dotenv
 load_dotenv()
-API_KEY = os.getenv("NRSDB_API_KEY")
+API_KEY = os.getenv("NSRDB_API_KEY")
 EMAIL = "alysson.machado@ifes.edu.br"
 BASE_URL = "https://developer.nrel.gov/api/nsrdb/v2/solar/psm3-download.json?"
 POINTS = [
