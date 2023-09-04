@@ -12,19 +12,20 @@ Plano de trabalho (12727): **Desenvolvimento do algoritmo de previsão de geraç
 Investigar, analisar e experimentar a utilização da tecnologia aprendizado de máquinapara a previsão de geração solar fotovoltaica para um horizonte de 24 horas à frente. 
 Ao final do projeto obter de forma qualitativa e quantitativa a qualidade do sistema de previsão de geração utilizando alguns métodos de aprendizagem distintos. Analisar a relevância dos dados metereológicos na previsão.
 
-## Instalação
+## Requisitos
+É projeto é desenvolvido e testado em ambiente Linux, para usuários Windows é altamente recomendado o uso do [WSL](https://docs.microsoft.com/en-us/windows/wsl/install).
 
+## Instalação
+Primeiramente em um diretório local de preferência faça o clone do repositório:
 ```shell
 cd <path>
 git clone https://github.com/AlyssonM/PVforecast.git
 ```
-
-## Requisitos
-
+Dentro do repositório local criar um ambiente virtual python, em seguida o ative e realize a instalação das dependências:
 ```shell
 cd PVforest
 python -m venv ./.venv
 source activate .venv/bin/activate
 pip install --upgrade pip
-pip install requirements.txt
+pip install -r requirements.txt
 ```
