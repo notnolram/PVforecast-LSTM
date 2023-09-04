@@ -7,9 +7,10 @@ import requests
 import pandas as pd
 import urllib.parse
 import time
-
-API_KEY = "{{YOUR_API_KEY}}"
-EMAIL = "insert.your.email@fake.com"
+from dotenv import load_dotenv
+load_dotenv()
+API_KEY = os.getenv("NRSDB_API_KEY")
+EMAIL = "alysson.machado@ifes.edu.br"
 BASE_URL = "https://developer.nrel.gov/api/nsrdb/v2/solar/psm3-download.json?"
 POINTS = [
 '1983991'
