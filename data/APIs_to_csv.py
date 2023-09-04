@@ -25,7 +25,7 @@ def hour_rounder(t):
 # data = res.read()
 # data_res = data.decode("utf-8")
 
-# with open('forecastdata.txt', 'w') as f:
+# with open('forecastdata.txt', 'w+') as f:
     # f.write(data_res)
     # f.close()
     
@@ -34,8 +34,9 @@ with open('forecastdata.txt', 'r') as f:
     f.close()
     
 # Weather API 
-#response = requests.request("GET", "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Avenida%20Filog%C3%B4nio%20Peixoto%2C%202220%2C%20Linhares-Brasil?unitGroup=metric&include=hours&key="+os.getenv("WHEATHER_API_KEY")+"&contentType=json")
-response = requests.request("GET", "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-19.39%2C%20-40.40?unitGroup=us&elements=datetime%2Ctemp%2Cdew%2Chumidity%2Cwindspeed%2Cwinddir%2Ccloudcover%2Csolarradiation%2Csolarenergy%2Cwindspeed50%2Cwinddir50%2Cdniradiation%2Cdifradiation%2Cghiradiation&key="+os.getenv("WHEATHER_API_KEY")+"&contentType=json")
+url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-19.39%2C%20-40.40?unitGroup=metric&include=hours&key="+os.getenv("WHEATHER_API_KEY")+"&contentType=json"
+print(url)
+response = requests.request("GET", url)
 if response.status_code!=200:
   print('Unexpected Status code: ', response.status_code)
   sys.exit()  
