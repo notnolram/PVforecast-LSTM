@@ -7,26 +7,26 @@ import requests
 import pandas as pd
 import urllib.parse
 import time
+import os
 from dotenv import load_dotenv
 load_dotenv()
 API_KEY = os.getenv("NSRDB_API_KEY")
 EMAIL = "alysson.machado@ifes.edu.br"
-BASE_URL = "https://developer.nrel.gov/api/nsrdb/v2/solar/psm3-download.json?"
+BASE_URL = "https://developer.nrel.gov/api/nsrdb/v2/solar/psm3-2-2-download.json?"
 POINTS = [
-'1983991'
+'1984360'
 ]
 
 def main():
     input_data = {
-        'attributes': 'dhi,dni,dew_point,surface_albedo,wind_speed,relative_humidity,air_temperature,surface_pressure',
+        'attributes': 'air_temperature,clearsky_dhi,clearsky_dni,clearsky_ghi,cloud_type,dew_point,dhi,dni,fill_flag,ghi,relative_humidity,solar_zenith_angle,surface_albedo,surface_pressure,total_precipitable_water,wind_direction,wind_speed',
         'interval': '30',
         'to_utc': 'false',
-        'half_hour': 'true',
         
         'api_key': API_KEY,
         'email': EMAIL,
     }
-    for name in ['1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']:
+    for name in ['2021']:
         print(f"Processing name: {name}")
         for id, location_ids in enumerate(POINTS):
             input_data['names'] = [name]

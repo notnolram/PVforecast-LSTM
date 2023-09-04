@@ -5,6 +5,7 @@ import json
 import pandas as pd
 import numpy as np
 from datetime import datetime,timedelta
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,16 +26,16 @@ def hour_rounder(t):
 # data_res = data.decode("utf-8")
 
 # with open('forecastdata.txt', 'w') as f:
-#     f.write(data_res)
-#     f.close()
+    # f.write(data_res)
+    # f.close()
     
 with open('forecastdata.txt', 'r') as f:
     res_data = f.read()
     f.close()
     
 # Weather API 
-response = requests.request("GET", "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Avenida%20Filog%C3%B4nio%20Peixoto%2C%202220%2C%20Linhares-Brasil?unitGroup=metric&include=hours&key="+os.getenv("WHEATHER_API_KEY")+"&contentType=json")
-#response = requests.request("GET", "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Avenida%20Filog%C3%B4nio%20Peixoto%2C%202220%2C%20Linhares-Brasil/2023-05-13/2023-05-18?unitGroup=us&include=hours&key="+os.getenv("WHEATHER_API_KEY")+"&contentType=json")
+#response = requests.request("GET", "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Avenida%20Filog%C3%B4nio%20Peixoto%2C%202220%2C%20Linhares-Brasil?unitGroup=metric&include=hours&key="+os.getenv("WHEATHER_API_KEY")+"&contentType=json")
+response = requests.request("GET", "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-19.39%2C%20-40.40?unitGroup=us&elements=datetime%2Ctemp%2Cdew%2Chumidity%2Cwindspeed%2Cwinddir%2Ccloudcover%2Csolarradiation%2Csolarenergy%2Cwindspeed50%2Cwinddir50%2Cdniradiation%2Cdifradiation%2Cghiradiation&key="+os.getenv("WHEATHER_API_KEY")+"&contentType=json")
 if response.status_code!=200:
   print('Unexpected Status code: ', response.status_code)
   sys.exit()  
@@ -42,8 +43,9 @@ if response.status_code!=200:
 # Parse the results as JSON
 jsonWeather = response.json()
 
-with open('wheatherdata.txt', 'r') as f:
-    weather_data = f.read()
+with open('wheatherdata.txt', 'w+') as f:
+    f.write(str(jsonWeather))
+    f.close()
     
 json_object = json.loads(res_data)
 json_formatted_str = json.dumps(json_object, indent=2)
@@ -73,8 +75,11 @@ for i in range(len(jsonWeather['days'])):
                            'Pressure (mBar)':jsonWeather['days'][i]['hours'][j]['pressure'],
                            'Solarradiation':jsonWeather['days'][i]['hours'][j]['solarradiation'],
                            'Cloud cover (%)':jsonWeather['days'][i]['hours'][j]['cloudcover']}
-                df_Weather = df_Weather.append(new_row, ignore_index=True)
-                df_Weather = df_Weather.append(new_row2, ignore_index=True)
+                #df_Weather = df_Weather.append(new_row, ignore_index=True)
+                df_Weather = pd.concat([df_Weather, pd.DataFrame([new_row])],ignore_index=True)
+                #df_Weather = df_Weather.append(new_row2, ignore_index=True)
+                df_Weather = pd.concat([df_Weather, pd.DataFrame([new_row2])],ignore_index=True)
+                
                 
         else:
             if(datetime.strptime(jsonWeather['days'][i]['datetime'],"%Y-%m-%d") <= datetime(2023, month, day+1)): #and 
@@ -89,8 +94,10 @@ for i in range(len(jsonWeather['days'])):
                            'Pressure (mBar)':jsonWeather['days'][i]['hours'][j]['pressure'],
                            'Solarradiation':jsonWeather['days'][i]['hours'][j]['solarradiation'],
                            'Cloud cover (%)':jsonWeather['days'][i]['hours'][j]['cloudcover']}
-                df_Weather = df_Weather.append(new_row, ignore_index=True)
-                df_Weather = df_Weather.append(new_row2, ignore_index=True)
+                #df_Weather = df_Weather.append(new_row, ignore_index=True)
+                df_Weather = pd.concat([df_Weather, pd.DataFrame([new_row])],ignore_index=True)
+                #df_Weather = df_Weather.append(new_row2, ignore_index=True)
+                df_Weather = pd.concat([df_Weather, pd.DataFrame([new_row2])],ignore_index=True)
 
 print(df_Weather)    
 
@@ -148,7 +155,7 @@ for i in range(len(forecast_df)):
     data.append([date_str, time_str, etr_str, etrn_str, ghi_str, "1", "10", dni_str,"1", "10", dhi_str, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", dry_bulb_temp_str, "", "", dew_point_temp_str, "", "", "", "", "", "", "", "", "", "", "", wspd_str, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""])
 
 #Escrita dos dados no arquivo TMY3
-with open("./Data/ES_Linhares_forecast.tmy3", "w") as file:
+with open("./ES_Linhares_forecast.tmy3", "w+") as file:
     # Escrita do cabeçalho
     file.write(", ".join(header1) + "\n")
     file.write(",".join(header2) + "\n")

@@ -1,0 +1,4 @@
+scipy
+requests
+pandas
+python-dotenv
