@@ -23,7 +23,7 @@ git clone https://github.com/AlyssonM/PVforecast.git
 ```
 Dentro do repositório local criar um ambiente virtual python, em seguida o ative e realize a instalação das dependências:
 ```shell
-cd PVforest
+cd PVforecast
 python -m venv ./.venv
 source activate .venv/bin/activate
 pip install --upgrade pip
