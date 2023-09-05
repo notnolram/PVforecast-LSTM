@@ -31,3 +31,9 @@ pip install -r requirements.txt
 ```
 ## VS Code
 É recomendado o uso do [VS code](https://code.visualstudio.com/download) integrado com a [extensão do WSL](https://learn.microsoft.com/pt-br/windows/wsl/tutorials/wsl-vscode) 
+
+## Revisão Bibliográfica
+1. SILVA, L. T. **Aprendizado de máquina aplicado na Previsão da Geração de Energia Elétrica de uma Usina Solar Fotovoltaica**. Trabalho de Conclusão de Curso - Universidade Federal do Ceará. Fortaleza, p. 60. 2022. Disponível em: https://repositorio.ufc.br/handle/riufc/65867.
+2. CUNHA, B. A. **Previsão intra-diária de geração fotovoltaica usando redes neurais recorrentes do tipo LSTM e dados históricos de energia**. Tese (Doutorado em Engenharia Elétrica) -  Universidade Estadual Paulista Júlio de Mesquita Filho. Bauru, p. 80. 2021. Disponível em: https://repositorio.unesp.br/handle/11449/215639.
+3. LAHOUAR, A.; MEJRI, A.; BEN HADJ SLAMA, J. **Importance based selection method for day-ahead photovoltaic power forecast using random forests.** International Conference on Green Energy and Conversion Systems, GECS 2017, 2017. https://doi.org/10.1109/GECS.2017.8066171.
+4. THAKER, J.; HÖLLER, R. **Evaluation of High Resolution WRF Solar**. Energies, vol. 16, no. 8, p. 1–13, 2023. https://doi.org/10.3390/en16083518.
