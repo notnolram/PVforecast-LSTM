@@ -29,3 +29,5 @@ source activate .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
+## VS Code
+É recomendado o uso do [VS code](https://code.visualstudio.com/download) integrado com a [extensão do WSL](https://learn.microsoft.com/pt-br/windows/wsl/tutorials/wsl-vscode) 
