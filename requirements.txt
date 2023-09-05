@@ -2,3 +2,5 @@ scipy
 requests
 pandas
 python-dotenv
+scikit-learn
+matplotlib

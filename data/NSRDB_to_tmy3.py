@@ -12,11 +12,12 @@ header1 = ["99999",'"IFES LINHARES"',"ES","-3.0","-19.40","-40.04","295"]
 header2 = ["Date (MM/DD/YYYY),Time (HH:MM),ETR (W/m^2),ETRN (W/m^2),GHI (W/m^2),GHI source,GHI uncert (%),DNI (W/m^2),DNI source,DNI uncert (%),DHI (W/m^2),DHI source,DHI uncert (%),GH illum (lx),GH illum source,Global illum uncert (%),DN illum (lx),DN illum source,DN illum uncert (%),DH illum (lx),DH illum source,DH illum uncert (%),Zenith lum (cd/m^2),Zenith lum source,Zenith lum uncert (%),TotCld (tenths),TotCld source,TotCld uncert (code),OpqCld (tenths),OpqCld source,OpqCld uncert (code),Dry-bulb (C),Dry-bulb source,Dry-bulb uncert (code),Dew-point (C),Dew-point source,Dew-point uncert (code),RHum (%),RHum source,RHum uncert (code),Pressure (mbar),Pressure source,Pressure uncert (code),Wdir (degrees),Wdir source,Wdir uncert (code),Wspd (m/s),Wspd source,Wspd uncert (code),Hvis (m),Hvis source,Hvis uncert (code),CeilHgt (m),CeilHgt source,CeilHgt uncert (code),Pwat (cm),Pwat source,Pwat uncert (code),AOD (unitless),AOD source,AOD uncert (code),Alb (unitless),Alb source,Alb uncert (code),Lprecip depth (mm),Lprecip quantity (hr),Lprecip source,Lprecip uncert (code),PresWth (METAR code),PresWth source,PresWth uncert (code)"]
 
 # Definição da data de início e intervalo de tempo
-year = ['2010', '2011', '2012', '2013', '2014', '2015', '2016','2017', '2018', '2019', '2020', '2021']
-start_date = datetime(int(year[0])-1, 12, 31, 23, 00, 0, 0)
+year = ['2018', '2019', '2020', '2021']
+#start_date = datetime(int(year[0])-1, 12, 31, 23, 00, 0, 0)
+start_date = datetime(int(year[0]), 1, 1, 0, 00, 0, 0)
 current_time = start_date
 #start_date = datetime(2020, 12, 31)
-time_interval = timedelta(hours=1,minutes=00)
+time_interval = timedelta(hours=0,minutes=30)
 
 # Lista para armazenar os dados
 data = []
@@ -32,10 +33,9 @@ R_H = []
 Pressure = []
 
 for i in range(len(year)):
-    filename = "D:/IFES/Green/Projetos/PVforecast/NSRDB/" + year[i] + "/1983991_-19.39_-40.06_"+ year[i] + ".csv"
+    filename = "./NSRDB/" + year[i] + "/1984360_-19.39_-40.06_"+ year[i] + ".csv"
     csvdata = pd.read_csv(filename, skiprows=[0,1])
-#csvdata = pd.read_csv("./Data/1983991_-19.39_-40.06_2019.csv", skiprows=[0,1])
-#csvdata = pd.read_csv("./Data/-19.407496_-40.04522_Solcast_PT30M.csv")
+    #csvdata = pd.read_csv("./Solcast/-19.407482_-40.045201_Solcast_PT15M.csv")
     #ghi = csvdata['GHI'].values
     ghi = ghi + [csvdata['GHI'][i] for i in range(len(csvdata['GHI']))]
     #dni = csvdata['DNI'].values
@@ -60,8 +60,8 @@ for i in range(len(year)):
 # Wind_Speed = csvdata['WindSpeed10m'].values
 # Loop para gerar os dados de cada hora do dia para 2 anos (granularidade de 30 min)
 
-for i in range(0,len(ghi),2):
-    current_time = current_time + time_interval
+for i in range(0,len(ghi),1):
+    
     
     # Geração dos valores aleatórios para irradiância e temperatura
     etr = 0
@@ -94,9 +94,9 @@ for i in range(0,len(ghi),2):
     if(current_time.month == 2 and current_time.day == 28 and current_time.hour == 23 and current_time.minute == 00):
         if(calendar.isleap(current_time.year)):
             current_time = datetime(current_time.year, 2, 29, 23, 00, 0, 0)
-               
+    current_time = current_time + time_interval           
 #Escrita dos dados no arquivo TMY3
-with open("./Data/ES_Linhares.tmy3", "w") as file:
+with open("./ES_Linhares.tmy3", "w+") as file:
     # Escrita do cabeçalho
     file.write(", ".join(header1) + "\n")
     file.write(",".join(header2) + "\n")

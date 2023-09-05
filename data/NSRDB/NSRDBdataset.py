@@ -26,7 +26,7 @@ def main():
         'api_key': API_KEY,
         'email': EMAIL,
     }
-    for name in ['2021']:
+    for name in ['2018']:
         print(f"Processing name: {name}")
         for id, location_ids in enumerate(POINTS):
             input_data['names'] = [name]
