@@ -3,8 +3,8 @@ from calculatePOA import calculate_POA_for_year
 from PVGeneration import PVGeneration
 
 # Carregar os dados
-dataset = pd.read_csv('../../data/Solcast/-19.407482_-40.045201_Solcast_PT15M.csv')
-dataset2 = pd.read_csv('../../data/Solcast/Ifes_Solcast_PT15M_2023.csv')
+dataset = pd.read_csv('data/Solcast/-19.407482_-40.045201_Solcast_PT15M.csv')
+dataset2 = pd.read_csv('data/Solcast/Ifes_Solcast_PT15M_2023.csv')
 
 # Selecionar apenas as colunas que queremos manter
 columns_to_keep = ['PeriodStart', 'AirTemp', 'Azimuth', 'CloudOpacity', 'Ghi', 'PrecipitableWater', 

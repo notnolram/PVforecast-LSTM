@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Carregar os dados
-dataset = pd.read_csv('../../data/Inversor/Out22_15min_SG5K-D_001_001.xlsx.csv', skiprows=1)
+dataset = pd.read_csv('data/Inversor/Out22_15min_SG5K-D_001_001.xlsx.csv', skiprows=1)
 
 # Selecionar apenas as colunas que queremos manter
 columns_to_keep = ['Horário', 'SG5K-D_001_001/Potência CC total(kW)']
