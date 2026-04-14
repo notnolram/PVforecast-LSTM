@@ -46,7 +46,7 @@ ARQUIVO_NSRDB = Path("data/NSRDB/9317325_-19.40_-40.05_2024.csv")
 TARGET_COL = "Generation(kWh)"
 
 # Tamanho da janela temporal
-# Ex.: se WINDOW = 3, o modelo usa 3 dias anteriores para prever o próximo
+# Ex.: se WINDOW = 2, o modelo usa 3 dias anteriores para prever o próximo
 WINDOW = 2
 
 # Define se as variáveis de nuvem serão usadas ou não
@@ -60,8 +60,8 @@ CLIMATE_FEATURES = [
     "DNI",
     "DHI",
     "Temperature",
-    "Relative Humidity",
-    "Wind Speed",
+    #"Relative Humidity",
+    #"Wind Speed",
     "Cloud Type",
 ]
 
