@@ -25,7 +25,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import *
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.losses import MeanSquaredError
+from tensorflow.keras.losses import MeanSquaredError, Huber
 from tensorflow.keras.metrics import RootMeanSquaredError, MeanAbsoluteError, MeanAbsolutePercentageError
 
 path_nsrdb = Path("data/NSRDB/9317325_-19.40_-40.05_2024.csv")
@@ -189,6 +189,7 @@ cp = ModelCheckpoint('model1.keras', save_best_only=True)
 model.compile(
     optimizer=Adam(learning_rate=learning_rate),
     loss=MeanSquaredError(),
+    #loss=Huber(delta=0.5),
     metrics=[
         RootMeanSquaredError(name='rmse'),
         MeanAbsoluteError(name='mae'),
@@ -230,6 +231,7 @@ plt.subplot(1, 2, 1)
 plt.plot(history.history['loss'], label='Treino')
 plt.plot(history.history['val_loss'], label='Validação')
 plt.title('Loss (MSE) durante o treinamento')
+#plt.title('Loss (Huber) durante o treinamento')
 plt.xlabel('Épocas')
 plt.ylabel('Loss')
 plt.legend()
